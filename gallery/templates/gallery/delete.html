@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% url 'galleryCreate' as galleryCreate %}
+
+{% block title %}Удалить фото{% endblock %}
+{% block pageName %}Удалим?{% endblock %}
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+        <p>Вы уверены что хотите удалить запись {{ photo_item.title }}?</p>
+        {{ form }}
+        <a href="{% url 'gallery:detail' photo_item.slug %}" class="btn btn-primary" style="background: #6ab000; border: none;">
+            Назад
+        </a>
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+{% endblock %}

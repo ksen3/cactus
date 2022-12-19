@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактировать{% endblock %}
+{% block pageName %}Исправим?{% endblock %}
+{% url 'update' photo_item.slug  as update%}
+
+{% block content %}
+  {% include 'form.html' with btnName='Редактировать' action=update %}
+{% endblock %}

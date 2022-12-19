@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% url 'gallery:create' as galleryCreate %}
+
+{% block title %}Добавить фото{% endblock %}
+{% block pageName %}Добавим?{% endblock %}
+
+{% block content %}
+
+{% include 'form.html' with btnName='Добавить' action=galleryCreate %}
+
+{% endblock %}

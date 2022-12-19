@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% url 'article:create' as articleCreate %}
+
+{% block title %}Добавить статью{% endblock %}
+{% block pageName %}Добавим?{{ post.title }}{% endblock %}
+
+{% block content %}
+
+{% include 'form.html' with btnName='Добавить' action=articleCreate %}
+
+{% endblock %}

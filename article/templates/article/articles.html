@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Статьи{% endblock %}
+{% block pageName %}Почитаем?{% endblock %}
+
+{% block content %}
+
+    {% for post in page_obj %}
+        <div class="card mb-3">
+
+          <img src="{% if post.photo %}{{ post.photo.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" class="card-img-top" alt="{{ post.title }}" style="max-width: 700px;">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.preview }}</p>
+       <!--<hr>
+            <p class="card-text" style="text-align: right;">Автор: {{ post.author }} | Опубликовано: {{ post.updated_at }}</p>-->
+            <a href="{{ post.get_absolute_url }}" class="btn btn-primary" style="background: #6ab000; border: none;">Читать далее...</a>
+          </div>
+
+          <div class="card-footer text-muted" style="text-align: right;">
+            Автор: {{ post.author }} | Опубликовано: {{ post.updated_at }}
+          </div>
+
+        </div>
+        <br>
+    {% endfor %}
+
+{% if page_obj.has_other_pages %}
+<div class="pagination justify-content-center">
+    <span class="step-links">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous" style="color: #437000;">&laquo;</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">&laquo;</a>
+                </li>
+            {% endif %}
+
+            {% for pageNum in paginator.page_range %}
+                <li class="page-item {% if pageNum == page_obj.number %} active {% endif %} ">
+                    <a class="page-link" href="?page={{ pageNum }}"  style="color: #437000;">{{ pageNum }}</a>
+                </li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next" style="color: #437000;">&raquo;</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                </li>
+            {% endif %}
+
+          </ul>
+        </nav>
+    </span>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% url 'article:delete' as articleDelete %}
+
+{% block title %}Удалить статью{% endblock %}
+{% block pageName %}Удалим?{{ post.title }}{% endblock %}
+
+{% block content %}
+
+    <form method="post">{% csrf_token %}
+        <p>Вы уверены что хотите удалить запись {{ post.title }}?</p>
+        {{ form }}
+        <a href="{% url 'article:detail' post.slug %}" class="btn btn-primary" style="background: #6ab000; border: none;">
+            Назад
+        </a>
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+
+{% endblock %}

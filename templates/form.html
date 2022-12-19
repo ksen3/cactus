@@ -1,0 +1,16 @@
+<form action="{{ action }}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+
+  <div style="color: red;">{{ form.non_field_errors }}</div>
+
+  {% for f in form %}
+    <style> li{ list-style-type: none; } </style>
+
+    <label for="{{ f.id_for_label}}">{{ f.label }}</label>
+    {{ f }}
+    <span style="color: red;">{{ f.errors }}</span>
+    <br>
+  {% endfor %}
+    <br>
+  <button type="submit" class="btn btn-primary" style="background: #6ab000; border: none;">{{ btnName }}</button>
+</form>

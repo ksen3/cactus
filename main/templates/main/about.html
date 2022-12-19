@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} О сайте {% endblock %}
+{% block pageName %}Узнаем?{% endblock %}
+
+{% block content %}
+    <p class="lead">
+        Данный сайт выполнен в учебных целях.
+    </p>
+
+    <p>{% lorem 5 p %}</p>
+
+
+    <p>
+        <div class="alert alert-info text-center" role="alert">
+          При создании сайта ни один кактус не пострадал!!!
+        </div>
+    </p>
+{% endblock %}
