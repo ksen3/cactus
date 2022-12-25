@@ -5,6 +5,8 @@
 {% url 'about' as about_url %}
 {% url 'contacts' as contacts_url %}
 {% url 'gallery:create' as gallery_create_url %}
+{% url 'register' as register_url %}
+{% url 'login' as login_url %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,10 +54,12 @@
           <a class="nav-link {% if request.path == contacts_url %}active{% endif %}" href="{% url 'contacts'%}">Контакты</a>
         </li>
 
+<!--     ДРОПДАУН     -->
+        {% if request.user.is_authenticated %}
         <li class="nav-item dropdown {% if request.path == gallery_create_url or request.path == article_create_url %}
                 active{% endif %}">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Для пользователей
+            Добавить
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'gallery:create' %}">Добавить фото</a></li>
@@ -66,16 +70,34 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
+        {% endif %}
 
       </ul>
+
+<!--    РЕГИСТРАЦИЯ И ВХОД     -->
+        <ul class="navbar-nav">
+            {% if request.user.is_authenticated %}
+                <a class="nav-link disabled" style="color: #444;">Привет, {{ user.username }}-кактус</a>
+                <a class="nav-link" href="{% url 'logout'%}">Выйти</a>
+            {% else %}
+              <a class="nav-link {% if request.path == register_url %}active{% endif %}" href="{% url 'register'%}">Регистрация</a>
+              <a class="nav-link {% if request.path == login_url %}active{% endif %}" href="{% url 'login'%}">Войти</a>
+            {% endif %}
+
+
+
+        </ul>
+
+<!--
       <form class="d-flex" role="search" action="https://google.com/search">
         <input class="form-control me-2" type="search" placeholder="Поиск в гугле" aria-label="Search" name="q">
         <button class="btn btn-outline-success" type="submit">Поиск</button>
       </form>
+-->
     </div>
   </div>
 </nav>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
             Весь контент, содержащийся на данном сайте, найден на просторах интернета.
             Владелец сайта не является правообладателем контента и не имеет никакого отношения к авторству
             используемого на сайте контента.

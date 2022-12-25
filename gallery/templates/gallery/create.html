@@ -6,6 +6,12 @@
 
 {% block content %}
 
-{% include 'form.html' with btnName='Добавить' action=galleryCreate %}
+{% if request.user.is_authenticated %}
+    {% include 'form.html' with btnName='Добавить' action=galleryCreate %}
+{% else %}
+    <div class="alert alert-danger" role="alert">
+      <h4>Для доступа к странице необходимо авторизоваться</h4>
+    </div>
+{% endif %}
 
 {% endblock %}

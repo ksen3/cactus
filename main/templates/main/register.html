@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+{% block pageName %}Познакомимся?{% endblock %}
+
+{% block content %}
+    {% include 'form.html' with btnName='Регистрация' %}
+<!--
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="background: #6ab000; border: none;">Регистрация</button>
+    </form>
+-->
+{% endblock %}

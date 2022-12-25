@@ -8,7 +8,7 @@ from .forms import *
 
 class ArticlesView(ListView):
     queryset = Article.objects.filter(is_published=True)
-    ordering = ['-pk']
+    ordering = ['-updated_at']
     paginate_by = 10
     template_name = 'article/articles.html'
 

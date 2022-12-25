@@ -5,5 +5,12 @@
 {% url 'update' photo_item.slug  as update%}
 
 {% block content %}
-  {% include 'form.html' with btnName='Редактировать' action=update %}
+  {% if request.user.is_authenticated %}
+      {% include 'form.html' with btnName='Редактировать' action=update %}
+  {% else %}
+      <div class="alert alert-danger" role="alert">
+        <h4>Для доступа к странице необходимо авторизоваться</h4>
+      </div>
+  {% endif %}
+
 {% endblock %}

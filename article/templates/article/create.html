@@ -5,7 +5,11 @@
 {% block pageName %}Добавим?{{ post.title }}{% endblock %}
 
 {% block content %}
-
-{% include 'form.html' with btnName='Добавить' action=articleCreate %}
-
+  {% if request.user.is_authenticated %}
+      {% include 'form.html' with btnName='Добавить' action=articleCreate %}
+  {% else %}
+      <div class="alert alert-danger" role="alert">
+        <h4>Для доступа к странице необходимо авторизоваться</h4>
+      </div>
+  {% endif %}
 {% endblock %}

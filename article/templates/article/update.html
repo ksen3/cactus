@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
-{% url 'article:create' as articleCreate %}
+{% url 'article:update' as articleUpdate %}
 
 {% block title %}Добавить статью{% endblock %}
 {% block pageName %}Добавим?{{ post.title }}{% endblock %}
 
 {% block content %}
 
-{% include 'form.html' with btnName='Редактировать' action=articleCreate %}
-
+  {% if request.user.is_authenticated %}
+      {% include 'form.html' with btnName='Добавить' action=articleUpdate %}
+  {% else %}
+      <div class="alert alert-danger" role="alert">
+        <h4>Для доступа к странице необходимо авторизоваться</h4>
+      </div>
+  {% endif %}
 {% endblock %}

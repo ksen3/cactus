@@ -15,6 +15,7 @@
       </div>
     </div>
 
+{% if request.user.is_authenticated %}
 <div class="containet text-center">
     <div class="row">
 
@@ -32,4 +33,5 @@
 
     </div>
 </div>
+{% endif %}
 {% endblock %}

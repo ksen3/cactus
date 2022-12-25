@@ -5,8 +5,8 @@
 {% block pageName %}Удалим?{{ post.title }}{% endblock %}
 
 {% block content %}
-
-    <form method="post">{% csrf_token %}
+  {% if request.user.is_authenticated %}
+      <form method="post">{% csrf_token %}
         <p>Вы уверены что хотите удалить запись {{ post.title }}?</p>
         {{ form }}
         <a href="{% url 'article:detail' post.slug %}" class="btn btn-primary" style="background: #6ab000; border: none;">
@@ -14,5 +14,11 @@
         </a>
         <button type="submit" class="btn btn-danger">Удалить</button>
     </form>
+  {% else %}
+      <div class="alert alert-danger" role="alert">
+        <h4>Для доступа к странице необходимо авторизоваться</h4>
+      </div>
+  {% endif %}
+
 
 {% endblock %}
